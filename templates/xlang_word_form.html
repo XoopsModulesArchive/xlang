@@ -1,0 +1,349 @@
+<{* $Id: xlang_word_form.html,v 1.7 2008/01/12 11:25:42 ohwada Exp $ *}>
+
+<a href="<{$xoops_url}>/"><{$smarty.const._XLANG_HOME}></a> &gt;&gt; 
+<a href="<{$xoops_url}>/modules/xlang/index.php">
+<{$module_name_s}></a> &gt;&gt; 
+<{if $dir_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$dir_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>">
+<{/if}>
+<{$dirname_s}></a> &gt;&gt; 
+<{if $lang_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$lang_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+<{/if}>
+<{$language_s}></a> &gt;&gt; 
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$file_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>">
+<{/if}>
+<{$file_s}></a> &gt;&gt; 
+<{$word_s}> &gt;&gt; 
+<{$smarty.const._XLANG_WORD_EDIT}>
+<br />
+
+<{if $is_module_admin }>
+  <br />
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+  <{$smarty.const._XLANG_ADMIN_CP}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php?dirname=<{$dirname_s}>">
+  <{$dirname_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+  <{$language_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/file_manage.php?id=<{$file_id}>">
+  <{$file_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/word_manage.php?id=<{$word_id}>">
+  <{$word_s}></a>
+  <br />
+<{/if}>
+
+<h3><{$module_name_s}></h3>
+
+<div style="text-align:center;">
+<form name="xlang_search" action="<{$xoops_url}>/modules/xlang/search.php" method="get">
+<input type="text" id="query" name="query" size="50" maxlength="255" value="" />
+<select id="andor" name="andor" size="1">
+<option value="AND" selected="selected" ><{$smarty.const._SR_ALL}></option>
+<option value="OR"    ><{$smarty.const._SR_ANY}></option>
+<option value="exact" ><$smarty.const._SR_EXACT}></option>
+</select>
+<input type="submit" value="<{$smarty.const._SR_SEARCH}>" />
+</form>
+</div><br />
+
+<{* index begin *}>
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $word_id >0 }>
+  <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$word_id}>">
+  <{$smarty.const._XLANG_SHOW}></a>
+<{else}>  
+  <{$smarty.const._XLANG_SHOW}>
+<{/if}>
+</span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $word_id >0 }>
+  <a href="<{$xoops_url}>/modules/xlang/word.php?op=form_word&amp;id=<{$word_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/word.php?op=form_word&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>&amp;word=<{$word_s}>">
+<{/if}>  
+<{$smarty.const._XLANG_WORD_EDIT}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<a href="<{$xoops_url}>/modules/xlang/word.php?op=form_file&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>">
+<{$smarty.const._XLANG_WORD_LUMP_EDIT}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?op=form&amp;id=<{$file_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?op=form&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>" >
+<{/if}>
+<{$smarty.const._XLANG_UPDATE_FILE}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?file_id=<{$file_id}>" target="_blank">
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}></a>
+<{else}>
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}>
+<{/if}>
+</span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<a href="<{$xoops_url}>/modules/xlang/log.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>" target="_blank">
+<{$smarty.const._XLANG_SHOW_LOG}>
+</a></span>
+<br />
+<{* index end *}>
+
+<h4><{$smarty.const._XLANG_WORD_EDIT}></h4>
+
+<{if $token_error }>
+  <div class="errorMsg">Token Error</div><br />
+<{/if}>
+
+<{if $param_error }>
+  <div class="errorMsg"><{$param_error}></div><br />
+<{/if}>
+
+<{if $language_image_s}>
+  <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$language_image_s}>" /> 
+<{/if}>
+<{$language_s}> &gt;&gt; 
+<{$file_s}> &gt;&gt; 
+<b><{$word_s}></b> <br /><br />
+
+<{* -- language select table begin -- *}>
+<table border="0" width="200px">
+<tr>
+
+<{if $show_cont_select }>
+  <td width="100px">
+  <{$smarty.const._XLANG_SELECT_LANGUAGE}><br />
+
+<{* -- contrast select form begin -- *}>
+  <form name="xlang_contrast" action="<{$xoops_url}>/modules/xlang/word.php" method="get" >
+  <input type="hidden" name="op"       value="form_word" />
+  <input type="hidden" name="dirname"  value="<{$dirname_s}>" />
+  <input type="hidden" name="language" value="<{$language_s}>" />
+  <input type="hidden" name="file"     value="<{$file_s}>" />
+  <input type="hidden" name="word"     value="<{$word_s}>" />
+  <select name="contrast" size="5">
+
+<{* -- contrast select begin -- *}>
+  <{section name="name_cont" loop=$cont_options}>
+    <{assign var="cont_value" value=$cont_options[name_cont] }>
+    <{if $cont_value == $cont_language }>
+      <option value="<{$cont_value}>" selected="selected" >
+    <{else}>
+      <option value="<{$cont_value}>" >
+    <{/if}>
+    <{$cont_value|capitalize}></option >
+  <{/section}>
+<{* -- contrast select end -- *}>
+
+  </select><br />
+  <input type="submit" value="<{$smarty.const._XLANG_SELECT}>" />
+  </form>
+<{* -- contrast select form end -- *}>
+
+  </td>
+<{/if}>
+
+<{if $show_new_select }>
+  <td width="100px">
+  <{$smarty.const._XLANG_ADD_LANGUAGE}><br />
+
+<{* -- language select form begin -- *}>
+  <form name="xlang_new_language" action="<{$xoops_url}>/modules/xlang/word.php" method="get" >
+  <input type="hidden" name="op"       value="form_word" />
+  <input type="hidden" name="dirname"  value="<{$dirname_s}>" />
+  <input type="hidden" name="file"     value="<{$file_s}>" />
+  <input type="hidden" name="word"     value="<{$word_s}>" />
+  <select name="language" size="5">
+
+<{* -- language select begin -- *}>
+  <{section name="name_new" loop=$new_options}>
+    <{assign var="new_value" value=$new_options[name_new] }>
+    <option value="<{$new_value}>" ><{$new_value|capitalize}></option >
+  <{/section}>
+<{* -- language select end -- *}>
+
+  </select><br />
+  <input type="submit" value="<{$smarty.const._XLANG_SELECT}>" />
+  </form>
+<{* -- language select form end -- *}>
+
+  </td>
+<{/if}>
+
+</tr>
+</table>
+<br />
+<{* -- language select table end -- *}>
+
+<{$smarty.const._XLANG_WORD_DATE}> : 
+<{if $orig_time > 0}>
+  <{$orig_time|formatTimestamp}>
+<{else}>
+  ---
+<{/if}>
+<br /><br />
+
+<{* -- edit form begin -- *}>
+<form name="xlang_edit" action="<{$xoops_url}>/modules/xlang/word.php" method="post" >
+<input type="hidden" name="XOOPS_G_TICKET" value="<{$token}>" />
+<input type="hidden" name="op" value="edit_word" />
+<input type="hidden" name="dirname"  value="<{$dirname_s}>" />
+<input type="hidden" name="language" value="<{$language_s}>" />
+<input type="hidden" name="file"     value="<{$file_s}>" />
+<input type="hidden" name="word"     value="<{$word_s}>" />
+<input type="hidden" name="contrast" value="<{$cont_language_s}>" />
+
+<{* -- edit table begin -- *}>
+<table class="outer" width="100%" cellpadding="4" cellspacing="1">
+<tr align="center"><th><{$word_s}></th></tr>
+
+<tr><td class="even">
+  <{if $orig_image_s}>
+    <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$orig_image_s}>" />
+  <{/if}>
+  <{$orig_language|capitalize}>
+</td></tr>
+<tr><td class="even">
+  <{if $orig_id > 0 }>
+    <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$orig_id}>">
+    <{$orig_id|string_format:"%04d"}></a> 
+    <{if $is_module_admin }>
+      <a href="<{$xoops_url}>/modules/xlang/admin/word_manage.php?op=form&amp;id=<{$orig_id}>">
+      <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a>
+    <{/if}>
+  <{else}>
+   ---
+  <{/if}>
+</td></tr>
+<tr><td class="odd">
+  <{$smarty.const._XLANG_CONTENT}><br />
+  <textarea name="content[<{$orig_id}>]" rows="5" cols="80"><{$orig_content_s}></textarea>
+  <br />
+  <{if $orig_undefined}>
+    <span style="color:#ff0000;"><{$smarty.const._XLANG_UNDEFINED}></span><br />
+  <{/if}>
+  <input type="hidden" name="lang[<{$orig_id}>]" value="<{$orig_language_s}>" />
+</td></tr>
+<tr><td class="odd">
+  <{$smarty.const._XLANG_NOTE}><br />
+  <textarea name="note[<{$orig_id}>]" rows="5" cols="80"><{$orig_note_s}></textarea>
+</td></tr>
+<tr><td class="odd">
+  <{html_radios name="act[$orig_id]" options=$act_options selected=$orig_act separator=" " }>
+</td></tr>
+
+<{if $show_contrast}>
+  <tr><td class="even">
+    <{if $cont_image_s}>
+      <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$cont_image_s}>" />
+    <{/if}>
+    <{$cont_language|capitalize}>
+  </td></tr>
+  <tr><td class="even">
+    <{if $cont_id > 0 }>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$cont_id}>">
+      <{$cont_id|string_format:"%04d"}></a> 
+      <{if $is_module_admin }>
+        <a href="<{$xoops_url}>/modules/xlang/admin/word_manage.php?op=form&amp;id=<{$cont_id}>">
+        <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a>
+      <{/if}>
+    <{else}>
+     ---
+    <{/if}>
+  </td></tr>
+  <tr><td class="odd">
+    <{$smarty.const._XLANG_CONTENT}><br />
+    <textarea name="content[<{$cont_id}>]" rows="5" cols="80"><{$cont_content_s}></textarea>
+    <br />
+    <{if $cont_undefined}>
+      <span style="color:#ff0000;"><{$smarty.const._XLANG_UNDEFINED}></span><br />
+    <{/if}>
+    <input type="hidden" name="lang[<{$cont_id}>]" value="<{$cont_language_s}>" />
+  </td></tr>
+  <tr><td class="odd">
+    <{$smarty.const._XLANG_NOTE}><br />
+    <textarea name="note[<{$cont_id}>]" rows="5" cols="80"><{$cont_note_s}></textarea>
+  </td></tr>
+  <tr><td class="odd">
+    <{html_radios name="act[$cont_id]" options=$act_options selected=$cont_act separator=" " }>
+  </td></tr>
+<{/if}>
+
+<tr><td class="head">
+  <input type="submit" name="save" value="<{$smarty.const._EDIT}>" /> 
+</td></tr>
+</table>
+<{* -- edit table end -- *}>
+
+  </form><br />
+<{* -- edit form end -- *}>
+
+<{* -- download table begin -- *}>
+<table class="outer" width="100%" cellpadding="4" cellspacing="1">
+<tr">
+<th>
+  <{if $orig_image_s}>
+    <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$orig_image_s}>" />
+  <{/if}>
+  <{$orig_language|capitalize}>
+</th>
+
+<{if $show_contrast}>
+  <th>
+    <{if $cont_image_s}>
+      <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$cont_image_s}>" />
+    <{/if}>
+    <{$cont_language|capitalize}>
+  </th>
+<{/if}>
+
+</tr>
+<tr>
+<td class="odd">
+  <a href="<{$xoops_url}>/modules/xlang/download.php?dirname=<{$dirname_s}>&amp;language=<{$orig_language_s}>&amp;file=<{$file_s}>" target="_blank" >
+  - <{$smarty.const._XLANG_DOWNLOAD_FILE}> </a><br />
+  <a href="<{$xoops_url}>/modules/xlang/log.php?dirname=<{$dirname_s}>&amp;language=<{$orig_language_s}>&amp;file=<{$file_s}>&amp;word=<{$word_s}>" target="_blank" >
+  - <{$smarty.const._XLANG_SHOW_LOG}> </a><br />
+</td>
+
+<{if $show_contrast}>
+  <td class="odd">
+    <a href="<{$xoops_url}>/modules/xlang/download.php?dirname=<{$dirname_s}>&amp;language=<{$orig_language_s}>&amp;file=<{$file_s}>" target="_blank" >
+    - <{$smarty.const._XLANG_DOWNLOAD_FILE}> </a><br />
+    <a href="<{$xoops_url}>/modules/xlang/log.php?dirname=<{$dirname_s}>&amp;language=<{$cont_language_s}>&amp;file=<{$file_s}>&amp;word=<{$word_s}>" target="_blank" >
+    - <{$smarty.const._XLANG_SHOW_LOG}> </a><br />
+  </td>
+<{/if}>
+
+</tr>
+</table><br />
+<{* -- download table end -- *}>
+
+<br />
+<hr />
+
+<div style="font-size:80%;">
+execution time : <{$execution_time}> sec <br />
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+    memory usage : <{$memory_usage}> MB <br />
+  <{/if}>
+  <br />
+    <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+    <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a><br />
+<{/if}>
+</div>

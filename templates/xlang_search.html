@@ -1,0 +1,180 @@
+<{* $Id: xlang_search.html,v 1.3 2007/12/31 10:51:46 ohwada Exp $ *}>
+
+<a href="<{$xoops_url}>/"><{$smarty.const._XLANG_HOME}></a> &gt;&gt; 
+<a href="<{$xoops_url}>/modules/xlang/index.php">
+<{$module_name_s}></a> &gt;&gt; 
+<{$smarty.const._SR_SEARCH}>
+<br /><br />
+
+<div style="text-align:center;">
+<form name="xlang_search" action="<{$xoops_url}>/modules/xlang/search.php" method="get">
+<input type="text" id="query" name="query" size="50" maxlength="255" value="<{$search_query_s}>" />
+<select id="andor" name="andor" size="1">
+<option value="AND"   <{$search_selected_and}>   ><{$smarty.const._SR_ALL}></option>
+<option value="OR"    <{$search_selected_or}>    ><{$smarty.const._SR_ANY}></option>
+<option value="exact" <{$search_selected_exact}> ><{$smarty.const._SR_EXACT}></option>
+</select>
+<input type="submit" value="<{$smarty.const._SR_SEARCH}>" />
+</form>
+</div>
+
+<h4><{$smarty.const._SR_SEARCH}></h4>
+
+<{if $search_show == 1}>
+  <div style="font-size:150%; font-weight:bold;"><{$lang_search_result}></div>
+
+  <{$lang_search_keyword}>
+  <span style="font-weight:bold;">
+  <{foreach item=keyword from=$search_keyword_list}>
+    <{$keyword|escape}> 
+  <{/foreach}>
+  </span><br />
+
+  <{if $search_show_ignore }>
+    <br />
+    <{$lang_search_ignore}><br />
+    <span style="font-weight:bold;">
+    <{foreach item=ignore from=$search_ignore_list}>
+      <{$ignore|escape}> 
+    <{/foreach}>
+    </span><br />
+  <{/if}>
+
+<{elseif $search_show == -1}>
+   <div style="color: #ff0000;"><{$smarty.const._SR_PLZENTER}></div>
+
+ <{elseif $search_show == -2}>
+   <div style="color: #ff0000;"><{$search_key_too_short}></div>
+<{/if}>
+
+<{if $search_file_show == 1}>
+  <h4><{$smarty.const._XLANG_FILE}></h4>
+
+  <{$search_file_found}><br /><br />
+
+<{* -- file list begin -- *}>
+  <{foreach item=list from=$file_list}>
+    <{if $list.dir_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+    <{/if}>
+    <{$list.dirname_s}></a> &gt;&gt; 
+    <{if $list.lang_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+    <{/if}>
+    <{$list.language_s}> &gt;&gt; 
+    <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$list.file_id}>&amp;keywords=<{$search_keywords_s}>">
+    <{$list.file_s}></a> 
+    (<{$list.time|formatTimestamp}>) <br />
+    <div style="border:blue 1px dotted; padding:3px; margin:3px;">
+    <{$list.summary_s}>
+    </div><br />
+  <{/foreach}>
+<{* -- file list end -- *}>
+
+  <{if $search_file_navi}>
+    <div style="text-align:center;"><{$search_file_navi}></div>
+  <{/if}>
+
+<{elseif $search_file_show == -1 }>
+  <h4><{$smarty.const._XLANG_FILE}></h4>
+  <div style="color: #ff0000;"><{$smarty.const._SR_NOMATCH}></div>
+<{/if}>
+
+<{if $search_word_show == 1}>
+  <h4><{$smarty.const._XLANG_WORD}></h4>
+
+  <{$search_word_found}><br /><br />
+
+<{* -- word list begin -- *}>
+  <{foreach item=list from=$word_list}>
+    <{if $list.dir_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+    <{/if}>
+    <{$list.dirname_s}></a> &gt;&gt; 
+    <{if $list.lang_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+    <{/if}>
+    <{$list.language_s}></a> &gt;&gt; 
+    <{if $list.file_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$list.file_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>">
+    <{/if}>
+    <{$list.file_s}></a> &gt;&gt; 
+    <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$list.word_id}>&amp;keywords=<{$search_keywords_s}>">
+    <{$list.word_s}></a> 
+    (<{$list.time|formatTimestamp}>) <br />
+    <div style="border:blue 1px dotted; padding:3px; margin:3px;">
+    <{$list.summary_s}>
+    </div><br />
+  <{/foreach}>
+<{* -- word list end -- *}>
+
+  <{if $search_word_navi}>
+    <div style="text-align:center;"><{$search_word_navi}></div>
+  <{/if}>
+
+<{elseif $search_word_show == -1 }>
+  <h4><{$smarty.const._XLANG_WORD}></h4>
+  <div style="color: #ff0000;"><{$smarty.const._SR_NOMATCH}></div>
+<{/if}>
+
+<{if $search_mail_show == 1 }>
+  <h4><{$smarty.const._XLANG_MAIL}></h4>
+
+  <{$search_mail_found}><br /><br />
+
+<{* -- mail list begin -- *}>
+  <{foreach item=list from=$mail_list}>
+    <{if $list.dir_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+    <{/if}>
+    <{$list.dirname_s}></a> &gt;&gt; 
+    <{if $list.lang_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+    <{/if}>
+    <{$list.language_s}></a> &gt;&gt; 
+    <a href="<{$xoops_url}>/modules/xlang/mail.php?id=<{$list.mail_id}>&amp;keywords=<{$search_keywords_s}>">
+    <{$list.mail_s}></a> 
+    (<{$list.time|formatTimestamp}>) <br />
+    <div style="border:#0000ff 1px dotted; padding:3px; margin:3px;">
+    <{$list.summary_s}>
+    </div><br />
+  <{/foreach}>
+<{* -- mail list end -- *}>
+
+  <{if $search_mail_navi}>
+    <div style="text-align:center;"><{$search_mail_navi}></div>
+  <{/if}>
+
+<{elseif $search_mail_show == -1 }>
+  <h4><{$smarty.const._XLANG_MAIL}></h4>
+  <div style="color: #ff0000;"><{$smarty.const._SR_NOMATCH}></div>
+<{/if}>
+
+<br /><br />
+<hr />
+
+<div style="font-size:80%;">
+execution time : <{$execution_time}> sec <br />
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+    memory usage : <{$memory_usage}> MB <br />
+  <{/if}>
+  <br />
+    <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+    <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a><br />
+<{/if}>
+</div>

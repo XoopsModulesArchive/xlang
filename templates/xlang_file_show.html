@@ -1,0 +1,183 @@
+<{* $Id: xlang_file_show.html,v 1.3 2007/12/28 21:54:23 ohwada Exp $ *}>
+
+<a href="<{$xoops_url}>/"><{$smarty.const._XLANG_HOME}></a> &gt;&gt; 
+<a href="<{$xoops_url}>/modules/xlang/index.php">
+<{$module_name_s}></a> &gt;&gt; 
+<{if $dir_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$dir_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>">
+<{/if}>
+<{$dirname_s}></a> &gt;&gt; 
+<{if $lang_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$lang_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+<{/if}>
+<{$language_s}></a> &gt;&gt; 
+<{$file_s}> &gt;&gt; 
+<{$smarty.const._XLANG_FILE_EDIT}>
+<br />
+
+<{if $is_module_admin }>
+  <br />
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+  <{$smarty.const._XLANG_ADMIN_CP}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php?dirname=<{$dirname_s}>">
+  <{$dirname_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+  <{$language_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/file_manage.php?id=<{$file_id}>">
+  <{$file_s}></a>
+  <br />
+<{/if}>
+
+<h3><{$module_name_s}></h3>
+
+<div style="text-align:center;">
+<form name="xlang_search" action="<{$xoops_url}>/modules/xlang/search.php" method="get">
+<input type="text" id="query" name="query" size="50" maxlength="255" value="<{$search_query_s}>" />
+<select id="andor" name="andor" size="1">
+<option value="AND" selected="selected" ><{$smarty.const._SR_ALL}></option>
+<option value="OR"    ><{$smarty.const._SR_ANY}></option>
+<option value="exact" ><$smarty.const._SR_EXACT}></option>
+</select>
+<input type="submit" value="<{$smarty.const._SR_SEARCH}>" />
+</form>
+</div><br />
+
+<{* index begin *}>
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$file_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>">
+<{/if}>
+<{$smarty.const._XLANG_SHOW}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<a href="<{$xoops_url}>/modules/xlang/word.php?op=form_file&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>">
+<{$smarty.const._XLANG_WORD_LUMP_EDIT}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?op=form&amp;id=<{$file_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?op=form&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>">
+<{/if}>
+<{$smarty.const._XLANG_FILE_EDIT}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?file_id=<{$file_id}>" target="_blank">
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}></a>
+<{else}>
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}>
+<{/if}>
+</span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<a href="<{$xoops_url}>/modules/xlang/log.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>" target="_blank">
+<{$smarty.const._XLANG_SHOW_LOG}>
+</a></span>
+<br />
+<{* index end *}>
+
+<h4><{$smarty.const._XLANG_FILE_EDIT}></h4>
+
+<{if $param_error }>
+  <div class="errorMsg"><{$param_error}></div><br />
+<{/if}>
+
+<{if $language_image_s}>
+  <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$language_image_s}>" /> 
+<{/if}>
+<{$language_s}> &gt;&gt; 
+<b><{$file_s}></b> <br /><br />
+
+<{if $word_error }>
+  <div style="color: #ff0000;"><{$word_error}></div><br />
+<{/if}>
+
+<{if $show_update }>
+  <div style="color: #0000ff; font-weight:bold;">
+  <{$smarty.const._XLANG_UPDATED_WORDS}>
+  </div><br />
+<{/if}>
+
+<{$smarty.const._XLANG_WORD_LATEST}> : 
+<{if $word_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$word_id}>">
+  <{$word_s}></a>
+<{else}>
+  <{$word_s}>
+<{/if}> 
+<{if $word_time > 0}>
+  <{$word_time|formatTimestamp}>
+<{else}>
+  ---
+<{/if}>
+<br />
+
+<{$smarty.const._XLANG_FILE_DATE}> : 
+<{if $file_time > 0}>
+  <{$file_time|formatTimestamp}>
+<{else}>
+  ---
+<{/if}>
+<br />
+
+<{$smarty.const._XLANG_LOG_DATE}> : 
+<{if $log_time > 0}>
+  <{$log_time|formatTimestamp}>
+<{else}>
+  ---
+<{/if}>
+<br /><br />
+
+<{if $show_undefined }>
+  <a href="<{$xoops_url}>/modules/xlang/word.php?op=undefined&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>&amp;contrast=<{$cont_language_s}>">
+  <span style="color: #ff0000; font-weight: bold;">
+  <{$smarty.const._XLANG_UNDEFINED_LIST}>
+  </span></a><br />
+  <ul>
+
+<{* -- undefined list begin -- *}>
+  <{foreach item=list from=$undefined_list}>
+    <{assign var="word_un" value=$list[0] }>
+    <li>
+    <a href="<{$xoops_url}>/modules/xlang/word.php?op=form_word&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>&amp;word=<{$word_un}>&amp;contrast=<{$cont_language_s}>">
+    <{$word_un}></a>
+    </li>
+  <{/foreach}>
+<{* -- undefined list end -- *}>
+
+</ul><br />
+<{/if}>
+
+<{$smarty.const._XLANG_CONTENT}><br />
+<div style="margin:3px; padding:3px; border:1px solid #808080; ">
+<{$content_s|nl2br}>
+</div><br />
+<{$smarty.const._XLANG_NOTE}><br />
+<div style="margin:3px; padding:3px; border:1px solid #808080; ">
+<{$note_s|nl2br}>
+</div><br />
+
+<br />
+<hr />
+
+<div style="font-size:80%;">
+execution time : <{$execution_time}> sec <br />
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+    memory usage : <{$memory_usage}> MB <br />
+  <{/if}>
+  <br />
+    <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+    <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a><br />
+<{/if}>
+</div>

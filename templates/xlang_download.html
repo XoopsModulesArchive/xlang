@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<{* $Id: xlang_download.html,v 1.2 2007/12/28 01:28:02 ohwada Exp $ *}>
+<meta http-equiv="Content-Type" content="text/html; charset=<{$charset_s}>" />
+<title><{$module_name}></title>
+</head>
+<body>
+
+<a href="<{$xoops_url}>/modules/xlang/index.php">
+<{$module_name_s}></a> &gt;&gt; 
+<{if $dir_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$dir_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>">
+<{/if}>
+<{$dirname_s}></a> &gt;&gt; 
+<{if $lang_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$lang_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+<{/if}>
+<{$language_s}></a> &gt;&gt; 
+<{if $file_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$file_id}>">
+  <{$file_s}></a> &gt;&gt; 
+<{elseif $file_s }>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>">
+  <{$file_s}></a> &gt;&gt; 
+<{/if}>
+<{if $mail_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/mail.php?id=<{$mail_id}>">
+  <{$mail_s}></a> &gt;&gt; 
+<{elseif $mail_s }>
+  <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;mail=<{$mail_s}>">
+  <{$mail_s}></a> &gt;&gt; 
+<{/if}>
+<{$charset_s}>
+<br />
+
+<{if $is_xoops_charset }>
+  <h4><{$smarty.const._XLANG_DOWNLOAD_FILE}></h4>
+<{else}>
+  <h4>Download File</h4>
+<{/if}>
+
+<{if $param_error }>
+  <div style="background-color:#FFCCCC; text-align:center; border:1px solid #DDDDFF; font-weight:bold; padding:10px;">
+  <{$param_error}>
+  </div><br />
+<{/if}>
+
+<{if $has_convert }>
+  <{if $is_xoops_charset }>
+    <{$smarty.const._XLANG_CAN_SELECT_CHARSET}>
+  <{else}>
+    You can select character set
+  <{/if}>
+  <br />
+
+  <{if $is_xoops_charset }>
+    <{$smarty.const._XLANG_SYSTEM_CHARSET}>
+  <{else}>
+    System character set
+  <{/if}>
+   : <{$charset_s}>
+  <br /><br />
+
+<{* -- select form begin -- *}>
+  <form name="xlang_charset" action="<{$xoops_url}>/modules/xlang/download.php" method="get">
+  <input type="hidden" name="dirname"  value="<{$dirname_s}>" />
+  <input type="hidden" name="language" value="<{$language_s}>" />
+  <input type="hidden" name="file"     value="<{$file_s}>" />
+  <input type="hidden" name="mail"     value="<{$mail_s}>" />
+  <input type="hidden" name="file_id"  value="<{$file_id}>" />
+  <input type="hidden" name="mail_id"  value="<{$mail_id}>" />
+  <select name="charset" size="5">
+
+<{* -- charset select begin -- *}>
+  <{foreach item=option from=$charset_options}>]
+    <{if $option.value == $charset }>
+      <option value="<{$option.value}>" selected="selected" >
+    <{else}>
+      <option value="<{$option.value}>" >
+    <{/if}>
+    <{$option.name}></option >
+  <{/foreach}>
+<{* -- charset select end -- *}>
+
+  </select><br />
+
+  <{if $is_xoops_charset }>
+    <input type="submit" value="<{$smarty.const._XLANG_SELECT}>" />
+  <{else}>
+    <input type="submit" value="Select" />
+  <{/if}>
+
+  </form><br />
+<{* -- select form end -- *}>
+<{/if}>
+
+<{if $file_id }>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?op=download&amp;file_id=<{$file_id}>&amp;charset=<{$charset_s}>">
+<{elseif $mail_id }>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?op=download&amp;mail_id=<{$mail_id}>&amp;charset=<{$charset_s}>">
+<{elseif $file }>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?op=download&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;file=<{$file_s}>&amp;charset=<{$charset_s}>">
+<{elseif $mail }>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?op=download&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;mail=<{$mail_s}>&amp;charset=<{$charset_s}>">
+<{/if}>
+[ 
+<{if $is_xoops_charset }>
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}>
+<{else}>
+  Download File
+<{/if}>
+ : <{$charset_s}> ]</a>
+<br /><br />
+
+<{if $file }>
+  <{if $is_xoops_charset }>
+    <{$smarty.const._XLANG_FILE_DATE}>
+  <{else}>
+    Updated date of language file
+  <{/if}>
+<{elseif $mail }>
+  <{if $is_xoops_charset }>
+    <{$smarty.const._XLANG_MAIL_DATE}>
+  <{else}>
+    Updated date of mail template
+  <{/if}>
+<{/if}>
+ : <{$time|formatTimestamp}>
+<br /><br />
+
+<{if $conv_error_s }>
+  <div style="color: #ff0000;"><{$conv_error_s}></div><br />
+<{/if}>
+
+<textarea name="content" rows="30" cols="80"><{$content_s}></textarea>
+<br /><br />
+<hr />
+
+<div style="text-align:center;">
+<{if $is_xoops_charset }>
+  <input type="button" value="<{$smarty.const._CLOSE}>" onclick="javascript:window.close();" />
+<{else}>
+  <input type="button" value="Close" onclick="javascript:window.close();" />
+<{/if}>
+</div>
+
+</body>
+</html>

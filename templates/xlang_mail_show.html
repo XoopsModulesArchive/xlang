@@ -1,0 +1,126 @@
+<{* $Id: xlang_mail_show.html,v 1.3 2007/12/28 01:28:02 ohwada Exp $ *}>
+
+<a href="<{$xoops_url}>/"><{$smarty.const._XLANG_HOME}></a> &gt;&gt; 
+<a href="<{$xoops_url}>/modules/xlang/index.php">
+<{$module_name_s}></a> &gt;&gt; 
+<{if $dir_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$dir_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>">
+<{/if}>
+<{$dirname_s}></a> &gt;&gt; 
+<{if $lang_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$lang_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+<{/if}>
+<{$language_s}></a> &gt;&gt; 
+<{$mail_s}> &gt;&gt; 
+<{$smarty.const._XLANG_MAIL_EDIT}>
+<br />
+
+<{if $is_module_admin }>
+  <br />
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+  <{$smarty.const._XLANG_ADMIN_CP}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php?dirname=<{$dirname_s}>">
+  <{$dirname_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>">
+  <{$language_s}></a> &gt;&gt; 
+  <a href="<{$xoops_url}>/modules/xlang/admin/mail_manage.php?id=<{$mail_id}>">
+  <{$mail_s}></a>
+  <br />
+<{/if}>
+
+<h3><{$module_name_s}></h3>
+
+<div style="text-align:center;">
+<form name="xlang_search" action="<{$xoops_url}>/modules/xlang/search.php" method="get">
+<input type="text" id="query" name="query" size="50" maxlength="255" value="<{$search_query_s}>" />
+<select id="andor" name="andor" size="1">
+<option value="AND" selected="selected" ><{$smarty.const._SR_ALL}></option>
+<option value="OR"    ><{$smarty.const._SR_ANY}></option>
+<option value="exact" ><$smarty.const._SR_EXACT}></option>
+</select>
+<input type="submit" value="<{$smarty.const._SR_SEARCH}>" />
+</form>
+</div><br />
+
+<{* index begin *}>
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $mail_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/mail.php?id=<{$mail_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/mail.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;mail=<{$mail_s}>">
+  <{/if}>
+<{$smarty.const._XLANG_SHOW}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $mail_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/mail.php?op=form&amp;id=<{$mail_id}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/xlang/mail.php?op=form&amp;dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;mail=<{$mail_s}>">
+<{/if}>
+<{$smarty.const._XLANG_MAIL_EDIT}>
+</a></span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<{if $mail_id > 0}>
+  <a href="<{$xoops_url}>/modules/xlang/download.php?mail_id=<{$mail_id}>" target="_blank">
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}></a>
+<{else}>
+  <{$smarty.const._XLANG_DOWNLOAD_FILE}>
+<{/if}>
+</span>
+
+<span style="background-color:#ffffe0; color:#000000; border:1px solid #808080; margin:3px; padding:3px;">
+<a href="<{$xoops_url}>/modules/xlang/log.php?dirname=<{$dirname_s}>&amp;language=<{$language_s}>&amp;mail=<{$mail_s}>" target="_blank">
+<{$smarty.const._XLANG_SHOW_LOG}>
+</a></span>
+<br />
+<{* index end *}>
+
+<h4><{$smarty.const._XLANG_MAIL_EDIT}></h4>
+
+<{if $param_error }>
+  <div class="errorMsg"><{$param_error}></div><br />
+<{/if}>
+
+<{if $language_image_s}>
+  <img src="<{$xoops_url}>/modules/xlang/images/flag/<{$language_image_s}>" /> 
+<{/if}>
+<{$language_s}> &gt;&gt; 
+<b><{$mail_s}></b> <br /><br />
+
+<{$smarty.const._XLANG_MAIL_DATE}> : 
+<{if $time > 0}>
+  <{$time|formatTimestamp}>
+<{else}>
+  ---
+<{/if}>
+<br /><br />
+
+<{$smarty.const._XLANG_CONTENT}><br />
+<div style="margin:3px; padding:3px; border:1px solid #808080; ">
+<{$content_s|nl2br}>
+</div><br />
+<{$smarty.const._XLANG_NOTE}><br />
+<div style="margin:3px; padding:3px; border:1px solid #808080; ">
+<{$note_s|nl2br}>
+</div><br />
+
+<br />
+<hr />
+
+<div style="font-size:80%;">
+execution time : <{$execution_time}> sec <br />
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+    memory usage : <{$memory_usage}> MB <br />
+  <{/if}>
+  <br />
+    <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+    <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a><br />
+<{/if}>
+</div>

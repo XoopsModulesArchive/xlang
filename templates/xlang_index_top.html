@@ -1,0 +1,294 @@
+<{* $Id: xlang_index_top.html,v 1.3 2007/12/29 01:39:15 ohwada Exp $ *}>
+
+<a href="<{$xoops_url}>/"><{$smarty.const._XLANG_HOME}></a> &gt;&gt; 
+<a href="<{$xoops_url}>/modules/xlang/index.php">
+<{$module_name_s}></a><br />
+
+<{if $is_module_admin }>
+  <br />
+  <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+  <{$smarty.const._XLANG_ADMIN_CP}></a><br />
+<{/if}>
+
+<h3><{$module_name_s}></h3>
+<{$index_desc}><br /><br />
+
+<div style="text-align:center;">
+<form name="xlang_search" action="<{$xoops_url}>/modules/xlang/search.php" method="get">
+<input type="text" id="query" name="query" size="50" maxlength="255" value="" />
+<select id="andor" name="andor" size="1">
+<option value="AND" selected="selected" ><{$smarty.const._SR_ALL}></option>
+<option value="OR"    ><{$smarty.const._SR_ANY}></option>
+<option value="exact" ><$smarty.const._SR_EXACT}></option>
+</select>
+<input type="submit" value="<{$smarty.const._SR_SEARCH}>" />
+</form>
+</div>
+
+<h4><{$smarty.const._XLANG_MODULE_LIST}></h4>
+
+<{* -- module list table begin -- *}>
+<table class="outer" width="100%" cellpadding="4" cellspacing="1">
+<tr align="center">
+<th></th>
+<th></th>
+<th colspan="3"><{$smarty.const._XLANG_WORD_LATEST}></th>
+<th></th>
+</tr>
+<tr align="center">
+<th><{$smarty.const._XLANG_MODULE}></th>
+<th><{$smarty.const._XLANG_WORD_NUM}></th>
+<th><{$smarty.const._XLANG_LANGUAGE}></th>
+<th><{$smarty.const._XLANG_FILE}></th>
+<th><{$smarty.const._XLANG_WORD}></th>
+<th><{$smarty.const._XLANG_WORD_DATE}></th>
+</tr>
+
+<{* -- dirname list begin -- *}>
+<{foreach item=list from=$dirname_list}>
+  <tr class="<{cycle values="even,odd"}>">
+  <td>
+    <{if $list.dir_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+    <{/if}>
+    <{$list.dirname_s}></a>
+  </td>
+  <td><{$list.count}></td>
+  <td>
+    <{if $list.lang_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+    <{/if}>
+    <{$list.language_s}></a>
+  </td><td>
+    <{if $list.file_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$list.file_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>">
+    <{/if}>
+    <{$list.file_s}></a>
+  </td><td>
+    <{if $list.word_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$list.word_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>&amp;word=<{$list.word_s}>">
+    <{/if}>
+    <{$list.word_s}></a>
+  </td><td>
+    <{if $list.time > 0 }>
+      <{$list.time|formatTimestamp}>
+    <{/if}>
+  </td>
+  </tr>
+<{/foreach}>
+<{* -- dirname list end -- *}>
+
+</table>
+<{* -- module list table end -- *}>
+
+<h4><{$smarty.const._XLANG_LATEST_FILES}></h4>
+
+<{* -- file list table begin -- *}>
+<table class="outer" width="100%" cellpadding="4" cellspacing="1">
+<tr align="center">
+<th></th>
+<th><{$smarty.const._XLANG_DIRNAME}></th>
+<th><{$smarty.const._XLANG_LANGUAGE}></th>
+<th><{$smarty.const._XLANG_FILE}></th>
+<th><{$smarty.const._XLANG_FILE_DATE}></th>
+<th></th>
+</tr>
+
+<{* -- file list begin -- *}>
+<{foreach item=list from=$file_list}>
+  <tr class="<{cycle values="even,odd"}>">
+  <td align="center">
+    <{if ( $list.show_download == 2 )&&( $list.file_id > 0 ) }>
+      <a href="<{$xoops_url}>/modules/xlang/download.php?file_id=<{$list.file_id}>" target="_blank">
+      <img src="<{$xoops_url}>/modules/xlang/images/download.gif" alt="download" />
+      </a>
+    <{elseif $list.show_download == 1}>
+      <{$smarty.const._XLANG_UPDATING}>
+    <{else}>
+      -
+    <{/if}>
+  </td><td>
+    <{if $list.dir_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+    <{/if}>
+    <{$list.dirname_s}></a>
+  </td><td>
+    <{if $list.lang_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+    <{/if}>
+    <{$list.language_s}></a>
+  </td><td>
+    <{if $list.show_file == 1 }>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?op=form_file&amp;dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>">
+    <{elseif $list.show_file == 2 }>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?op=undefined&amp;dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>">
+    <{elseif $list.file_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$list.file_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>">
+    <{/if}>
+    <{$list.file_s}></a>
+  </td><td>
+    <{if $list.time > 0 }>
+      <{$list.time|formatTimestamp}>
+    <{/if}>
+  </td><td>
+    <{if $list.show_undefined}>
+      <span style="color:#ff0000;"><{$smarty.const._XLANG_UNDEFINED}></span>
+    <{/if}>
+  </td>
+  </tr>
+<{/foreach}>
+<{* -- file list end -- *}>
+
+</table>
+<{* -- file list table end -- *}>
+
+<{if $show_mail}>
+  <h4><{$smarty.const._XLANG_LATEST_MAILS}></h4>
+
+<{* -- mail list table begin -- *}>
+  <table class="outer" width="100%" cellpadding="4" cellspacing="1">
+  <tr align="center">
+  <th></th>
+  <th><{$smarty.const._XLANG_DIRNAME}></th>
+  <th><{$smarty.const._XLANG_LANGUAGE}></th>
+  <th><{$smarty.const._XLANG_MAIL}></th>
+  <th><{$smarty.const._XLANG_MAIL_DATE}></th>
+  </tr>
+
+<{* -- mail list begin -- *}>
+  <{foreach item=list from=$mail_list}>
+    <tr class="<{cycle values="even,odd"}>">
+    <td align="center">
+      <{if $list.mail_id > 0 }>
+        <a href="<{$xoops_url}>/modules/xlang/download.php?mail_id=<{$list.mail_id}>" target="_blank">
+        <img src="<{$xoops_url}>/modules/xlang/images/download.gif" alt="download" />
+        </a>
+      <{else}>
+        -
+      <{/if}>
+    </td><td>
+      <{if $list.dir_id > 0}>
+        <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+      <{else}>
+        <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+      <{/if}>
+      <{$list.dirname_s}></a>
+    </td><td>
+      <{if $list.lang_id > 0}>
+        <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+      <{else}>
+        <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+      <{/if}>
+      <{$list.language_s}></a>
+    </td><td>
+      <{if $list.mail_id > 0}>
+        <a href="<{$xoops_url}>/modules/xlang/mail.php?id=<{$list.mail_id}>">
+      <{else}>
+        <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;mail=<{$list.mail_s}>">
+      <{/if}>
+      <{$list.mail_s}></a>
+    </td><td>
+      <{if $list.time > 0 }>
+        <{$list.time|formatTimestamp}>
+      <{/if}>
+    </td>
+    </tr>
+  <{/foreach}>
+<{* -- mail list end -- *}>
+
+  </table>
+<{* -- mail list table end -- *}>
+<{/if}>
+
+
+<h4><{$smarty.const._XLANG_LATEST_WORDS}></h4>
+
+<{* -- word list table begin -- *}>
+<table class="outer" width="100%" cellpadding="4" cellspacing="1">
+<tr align="center">
+<th><{$smarty.const._XLANG_DIRNAME}></th>
+<th><{$smarty.const._XLANG_LANGUAGE}></th>
+<th><{$smarty.const._XLANG_FILE}></th>
+<th><{$smarty.const._XLANG_WORD}></th>
+<th><{$smarty.const._XLANG_WORD_DATE}></th>
+</tr>
+
+<{* -- word list begin -- *}>
+<{foreach item=list from=$word_list}>
+  <tr class="<{cycle values="even,odd"}>">
+  <td>
+    <{if $list.dir_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dir_id=<{$list.dir_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>">
+    <{/if}>
+    <{$list.dirname_s}></a>
+  </td><td>
+    <{if $list.lang_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?lang_id=<{$list.lang_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/index.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>">
+    <{/if}>
+    <{$list.language_s}></a>
+  </td><td>
+    <{if $list.file_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?id=<{$list.file_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/file.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>">
+    <{/if}>
+    <{$list.file_s}></a>
+  </td><td>
+    <{if $list.word_id > 0}>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?id=<{$list.word_id}>">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/xlang/word.php?dirname=<{$list.dirname_s}>&amp;language=<{$list.language_s}>&amp;file=<{$list.file_s}>&amp;word=<{$list.word_s}>">
+    <{/if}>
+    <{$list.word_s}></a>
+  </td><td>
+    <{if $list.time > 0 }>
+      <{$list.time|formatTimestamp}>
+    <{/if}>
+  </td>
+  </tr>
+<{/foreach}>
+<{* -- word list end -- *}>
+
+</table><br />
+<{* -- word list table end -- *}>
+
+<{include file="db:system_notification_select.html"}>
+
+<br /><br />
+<hr />
+
+<{* this is NOT copyright. you can remove this. *}>
+<div style="font-size:80%; text-align:right">
+<a href="http://linux2.ohwada.net/" target="_blank">
+Powered by Happy Linux </a>
+</div>
+
+<div style="font-size:80%;">
+execution time : <{$execution_time}> sec <br />
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+    memory usage : <{$memory_usage}> MB <br />
+  <{/if}>
+  <br />
+    <a href="<{$xoops_url}>/modules/xlang/admin/index.php">
+    <{$smarty.const._XLANG_GOTO_ADMIN_CP}></a><br />
+<{/if}>
+</div>
